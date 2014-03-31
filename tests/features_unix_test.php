@@ -50,7 +50,11 @@ class ezcBaseFeaturesUnixTest extends ezcTestCase
 
     public function testSupportsUserId()
     {
-        $this->assertEquals( true, ezcBaseFeatures::supportsUserId() );
+        if(ezcBaseFeatures::supportsUserId()) {
+            $this->assertEquals( true, ezcBaseFeatures::supportsUserId() );
+        } else {
+            $this->markTestSkipped("No posix_getpwuid support available");
+        }
     }
 
 /*  // Need to find a way to make this test work, as setting global enviroment variables
@@ -73,12 +77,12 @@ class ezcBaseFeaturesUnixTest extends ezcTestCase
 
     public function testGetImageConvertExecutable()
     {
-        $this->assertEquals( '/usr/bin/convert', ezcBaseFeatures::getImageConvertExecutable() );
+        $this->assertRegExp( '@/bin/convert$@', ezcBaseFeatures::getImageConvertExecutable() );
     }
 
     public function testGetImageIdentifyExecutable()
     {
-        $this->assertEquals( '/usr/bin/identify', ezcBaseFeatures::getImageIdentifyExecutable() );
+        $this->assertRegExp( '@/bin/identify$@', ezcBaseFeatures::getImageIdentifyExecutable() );
     }
 
     public function testHasImageIdentify()

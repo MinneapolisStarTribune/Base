@@ -1,5 +1,6 @@
 <?php
-if ( ! @include __DIR__ . '/../vendor/autoload.php' )
+$vendor = realpath(__DIR__.'/../../../../vendor');
+if ( ! @include $vendor . '/autoload.php' )
 {
     die(<<<'EOT'
 You must set up the project dependencies, run the following commands:
@@ -9,6 +10,7 @@ php composer.phar install --dev
 You can then run tests by calling:
 
 phpunit
+
 EOT
        );
 }

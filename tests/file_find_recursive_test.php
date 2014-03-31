@@ -93,8 +93,11 @@ class ezcBaseFileFindRecursiveTest extends ezcTestCase
             11 => 'vendor/zetacomponents/unit-test/src/test_autoload.php',
         );
 
+        $cwd = getcwd();
+        chdir('../../..');
         self::assertEquals( $expected, ezcBaseFile::findRecursive( "vendor/zetacomponents/unit-test", array( '@^vendor/zetacomponents/unit-test/@' ), array( '@/docs/@', '@\.git@', '@\.swp$@' ), $stats ) );
-        self::assertEquals( array( 'size' => 191117, 'count' => 12 ), $stats );
+        self::assertEquals( array( 'size' => 191208, 'count' => 12 ), $stats );
+        chdir($cwd);
     }
 
     public function testRecursive3()
@@ -102,8 +105,11 @@ class ezcBaseFileFindRecursiveTest extends ezcTestCase
         $expected = array (
             0 => 'vendor/zetacomponents/unit-test/design/class_diagram.png',
         );
+        $cwd = getcwd();
+        chdir('../../..');
         self::assertEquals( $expected, ezcBaseFile::findRecursive( "vendor/zetacomponents/unit-test", array( '@\.png$@' ), array( '@\.svn@' ), $stats ) );
         self::assertEquals( array( 'size' => 166066, 'count' => 1 ), $stats );
+        chdir($cwd);
     }
 
     public function testRecursive4()
@@ -111,8 +117,11 @@ class ezcBaseFileFindRecursiveTest extends ezcTestCase
         $expected = array (
             0 => 'vendor/zetacomponents/unit-test/design/class_diagram.png',
         );
+        $cwd = getcwd();
+        chdir('../../..');
         self::assertEquals( $expected, ezcBaseFile::findRecursive( "vendor/zetacomponents/unit-test", array( '@/design/@' ), array( '@\.svn@' ), $stats ) );
         self::assertEquals( array( 'size' => 166066, 'count' => 1 ), $stats );
+        chdir($cwd);
     }
 
     public function testRecursive5()
@@ -126,13 +135,19 @@ class ezcBaseFileFindRecursiveTest extends ezcTestCase
             5 => 'vendor/zetacomponents/unit-test/src/test/image_case.php',
             6 => 'vendor/zetacomponents/unit-test/src/test_autoload.php',
         );
+        $cwd = getcwd();
+        chdir('../../..');
         self::assertEquals( $expected, ezcBaseFile::findRecursive( "vendor/zetacomponents/unit-test", array( '@\.(php|png)$@' ), array( '@/docs/@', '@\.svn@' ) ) );
+        chdir($cwd);
     }
 
     public function testRecursive6()
     {
         $expected = array();
+        $cwd = getcwd();
+        chdir('../../..');
         self::assertEquals( $expected, ezcBaseFile::findRecursive( "vendor/zetacomponents/unit-test", array( '@xxx@' ) ) );
+        chdir($cwd);
     }
 
     public function testNonExistingDirectory()
@@ -154,9 +169,12 @@ class ezcBaseFileFindRecursiveTest extends ezcTestCase
             0 => 'vendor/zetacomponents/unit-test/design/class_diagram.png',
         );
 
+        $cwd = getcwd();
+        chdir('../../..');
         $stats = array();
         self::assertEquals( $expected, ezcBaseFile::findRecursive( "vendor/zetacomponents/unit-test", array( '@/design/@' ), array( '@\.svn@' ), $stats ) );
         self::assertEquals( array( 'size' => 166066, 'count' => 1 ), $stats );
+        chdir($cwd);
     }
 
     public static function suite()
