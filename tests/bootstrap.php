@@ -1,6 +1,12 @@
 <?php
-$vendor = realpath(__DIR__.'/../../../../vendor');
-if ( ! @include $vendor . '/autoload.php' )
+// Locate and include the composer autoloader
+$sanity = 5;
+$dir = realpath(__DIR__);
+do {
+    $dir = dirname($dir);
+    $autoload = $dir.'/vendor/autoload.php';
+} while ($sanity-- && !file_exists($autoload));
+if ( ! @include $autoload )
 {
     die(<<<'EOT'
 You must set up the project dependencies, run the following commands:
