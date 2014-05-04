@@ -9,7 +9,6 @@ php composer.phar install --dev
 You can then run tests by calling:
 
 phpunit
-
 EOT
        );
 }
