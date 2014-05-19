@@ -41,7 +41,18 @@
     "license": "Apache-2.0",
     "name": "zetacomponents/base",
     "type": "library",
+    "require": {
+        "php": ">=5.3.0"
+    },
     "require-dev": {
-        "zetacomponents/unit-test": "*"
+        "phpunit/phpunit": "4.0.*",
+        "zetacomponents/unit-test": "dev-initial-pull"
+    },
+    "repositories": [
+    {
+        "type": "git",
+        "url": "git@github.com:ewbarnard/UnitTest.git"
     }
+    ],
+    "minimum-stability": "stable"
 }
